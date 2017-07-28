@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#This version attempts to send a message from the command line using the postfix mail command. Problem is that it usually takes a very long time to send emails.
+
+#THE MESSAGE COMES FIRST, THE NUMBER COMES SECOND
+
+
+#Known service providers:
+#Sprint: messaging.sprintpcs.com
+#T-mobile: tmomail.net 
+#Verizon: vtext.com
+#AT&T: txt.att.net
+
+
+number="0000000001";
+message="This is the test message";
+#echo $message 1
+if [ $# -eq 2 ]; then
+    message=$1;
+    number=$2;
+fi
+if [ $# -eq 1 ]; then
+    message=$1;
+fi
+
+function sendText () {
+    number="0000000001";
+    message="This is the test message";
+    #messageFile="/tmp/randomstuffforthesmsmessage"
+    provider="tmomail.net"
+    subject="stuff"
+
+#    echo $1
+#    echo $2
+#    echo $#
+    
+    if [ $# -eq 2 ]; then
+        message=$1;
+        number=$2;
+    fi
+    if [ $# -eq 1 ]; then
+        message=$1;
+    fi
+    
+    echo $message 3
+    
+    #echo $message > $messageFile
+    #combined="$number@$provider";
+    
+    echo $message | mail -s $subject $number@$provider;
+    echo "message sent to $number";
+    #rm $messageFile
+    return 0;
+}
+export -f sendText
+sendText "$message" $number

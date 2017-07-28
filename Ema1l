@@ -1,0 +1,47 @@
+#!/bin/bash
+
+#This creates a function that allows you to send email from the terminal
+#       WRITE THE EMAIL FIRST
+#       THEN WRITE THE SUBJECT (OR OMIT IF NO WANT)
+#       THEN WRITE MESSAGE
+
+message="My message"
+subject="Empty"
+email="user@gmail.com"
+
+if [ $# -eq 2 ]; then
+    message=$2
+    email=$1
+fi
+if [ $# -eq 3 ]; then
+    message=$3
+    email=$1
+    subject=$2
+fi
+
+function sendMail () {
+    message="My message"
+    subject="Empty"
+    email="user@gmail.com"
+    
+    if [ $# -eq 2 ]; then
+        message=$2
+        email=$1
+    fi
+    if [ $# -eq 3 ]; then
+        message=$3
+        email=$1
+        subject=$2
+    fi
+    #-N      Inhibits initial display of message headers when reading mail or editing a mail folder.
+    #-f      Use an alternate mailbox.  Defaults to the user's mbox if no file is specified.  When quit, mail writes undeleted messages back to this file.
+
+    echo $message | mail -N -r "Me" -s "$subject" $email 
+#    echo "The email was sent: $message"
+#    echo $email
+#    echo $subject
+    return 0;
+}
+#This only works for the subshells of where this function is defined
+export -f sendMail
+sendMail $email "$subject" "$message"

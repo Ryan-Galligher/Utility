@@ -1,0 +1,11 @@
+#!/bin/bash
+synclient PalmDetect=1 PalmMinWidth=200 PalmMinZ=2000
+#This appears to be the most important part of it
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Finger" 50 70 100
+xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Noise Cancellation" 10 10
+#sysctl --system
+
+#xinput list
+#will give your device name (look for TouchPad)
+
+#xinput list-props "Touchpad Name"

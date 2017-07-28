@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" == "" ]; then
+    echo "Usage: pingscanner"
+    echo "Example: PingScanner 120.0.0"
+else
+    echo "" > temp_ping_storage
+    for x in $(seq 1 254); do
+        ping -c 1 $1.$x >> temp_ping_storage
+    done
+    grep -B 1 "1 received" temp_ping_storage
+    rm temp_ping_storage
+fi

@@ -1,0 +1,29 @@
+#! /bin/bash
+
+#NOTE: USING THIS FUNCTION WILL CAUSE THE SCREEN TO BEGIN DOING WEIRD THINGS AND THE ONLY REAL WAY TO FIX IT IS TO TRY AND BEGIN TO "LOG OUT", THEN QUICKLY SAY TO NOT. THE COMPUTER IS THEN RESPONSIVE AGAIN.
+
+# Find the line in "xrandr -q - verbose" output that contains current screen orientation and "strip" out current orientation.
+
+rotation=$(echo $(xrandr -q --verbose | grep 'connected' | egrep -e ') ' | cut -f6 -d" "))
+
+# Using current screen orientation to rotate screen and input devices.
+echo $rotation
+
+case $rotation in
+    normal)
+    # Rotate to the left
+    xrandr --output eDP --rotate left;
+    ;;
+    left)
+    # Rotate to inverted
+    xrandr --output eDP --rotate inverted;
+    ;;
+    inverted)
+    #Rotate to the right
+    xrandr --output eDP --rotate right;
+    ;;
+    right)
+    # Rotate to normal
+    xrandr --output eDP --rotate normal;
+    ;;
+esac

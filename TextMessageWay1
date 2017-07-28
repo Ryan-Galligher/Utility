@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#This allows you to send a text message from the termial
+#NOTE: THIS CODE NO LONGER WORKS BECAUSE TEXTBELT IS STUPID AND NOW REQUIRES A SIGN UP IN ORDER TO USE IT. THIS SCRIPT DOES NOT HAVE A KEY, NOR THE CAPEABILITY TO PASS IN ONE.
+
+
+#THE MESSAGE COMES FIRST, THE NUMBER COMES SECOND
+
+number="0000000001";
+message="This is the test message";
+#echo $message 1
+if [ $# -eq 2 ]; then
+    message=$1;
+    number=$2;
+fi
+if [ $# -eq 1 ]; then
+    message=$1;
+fi
+
+#echo $message 2
+
+function sendText () {
+    number="0000000001";
+    message="This is the test message";
+
+#    echo $1
+#    echo $2
+#    echo $#
+    
+    if [ $# -eq 2 ]; then
+        message=$1;
+        number=$2;
+    fi
+    if [ $# -eq 1 ]; then
+        message=$1;
+    fi
+    
+    echo $message 3
+    
+    curl http://textbelt.com/text -d number=$number -d "message=$message";
+    echo "message sent to $number";
+    return 0;
+}
+export -f sendText
+sendText "$message" $number
