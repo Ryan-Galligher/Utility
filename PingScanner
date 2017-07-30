@@ -7,7 +7,13 @@ else
     echo "" > temp_ping_storage
     for x in $(seq 1 254); do
         ping -c 1 $1.$x >> temp_ping_storage
+        yes "#" | head -n $(($x/5)) > hashtagList.txt
+        yes " " | head -n $((50-$x/5)) > spaceList.txt
+        echo -ne "[$( tr -d '\n' < hashtagList.txt )$( tr -d '\n' < spaceList.txt )]($(( ($x*100)/254))%)\r"
+        #echo -ne "[$( for i in "seq $(($x/5))"; do echo -n "#";done )$( for i in "seq $((50-$x/5))"; do echo -n ' ';done )]($((x/254 * 100))%)\r"
     done
     grep -B 1 "1 received" temp_ping_storage
     rm temp_ping_storage
+    rm hashtagList.txt
+    rm spaceList.txt
 fi
