@@ -16,4 +16,6 @@ TouchPadSensitivity: This is a Bash script that lowers the sensetivity of the tr
 
 Txtmsg: Simply a symlink to the currently usable way to send text messages, currently set to TextMessageWay2.
 
+offBluetooth: simply a command to turn off bluetooth that will have a symlink to be run on startup.
+
 updateContainers: A Bash script to update all lxc vms that I currently have. NOTE: I DID NOT PERSONALLY WRITE THE LOGIC OF THIS SCRIPT.
